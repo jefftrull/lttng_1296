@@ -2,7 +2,6 @@
 #include <cstdio>
 
 #define TRACEPOINT_DEFINE
-#define TRACEPOINT_PROBE_DYNAMIC_LINKAGE
 #include "tracepoints.hpp"
 #include "remote/remote.hpp"
 
