@@ -7,4 +7,4 @@ Provider "XXX" accepted, version 1.0 is compatible with...
 ```
 appears only for the one of the providers when `LTTNG_UST_DEBUG=1` is set.
 
-The problem appears to be related to linking - `ldd` shows that the final executable depends only on the provider shared library whose events are observable. Creating an artificial dependency on the other shared library (e.g. via `LD_PRELOAD` or adding a dependency in its code) works around the issue.
+After some further analysis it seems that one of the providers' shared library is built with `-fvisibility=hidden`. Without a suitable `__attribute__((visibility="xxx"))` on the tracepoint-related symbols that provider's events won't be visible. This testcase reflects that situation.
